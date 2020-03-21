@@ -2,7 +2,7 @@ name-template: 'v$NEXT_PATCH_VERSION 🌈'
 tag-template: 'v$NEXT_PATCH_VERSION'
 prerelease: true
 categories:
-  - title: 🚀 Features
+  - title: 🚀 New Features and Improvements
     labels:
       - feature
       - enhancement
@@ -12,7 +12,7 @@ categories:
       - bugfix
       - bug
   - title: 📝 Documentation updates
-    label: documentation'
+    label: documentation
   # Default label used by Dependabot
   - title: 📦 Dependency updates
     label: dependencies
@@ -32,13 +32,12 @@ exclude-labels:
 #change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 template: |
   <!-- Optional: add a release summary here -->
-  Here what's changed since latest `$PREVIOUS_TAG` version
 
   # Changes
   $CHANGES
 
-  # Contributors List
-  $CONTRIBUTORS
+  # Contributors
+  Thanks to all the contributors of this release: $CONTRIBUTORS
 
 replacers:
   - search: '@dependabot-preview'
