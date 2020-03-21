@@ -1,0 +1,3 @@
+= Welcome to gh pages playground
+
+This static built hosted on github pages is built with AsciiDoctor
