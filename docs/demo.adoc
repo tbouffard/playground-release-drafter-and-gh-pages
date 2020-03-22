@@ -1,0 +1,3 @@
+=== Demo
+
+BPMN Visu: *link:demo/index.html[give a try to the demo]*
