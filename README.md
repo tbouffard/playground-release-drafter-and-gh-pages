@@ -21,6 +21,7 @@ asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
     - TOC: https://asciidoctor.org/docs/user-manual/#user-toc
   - https://github.com/asciidoctor/docker-asciidoctor
   - http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html
+  - https://github.com/asciidoctor/jekyll-asciidoc
 - Push to github pages
   - https://github.com/peaceiris/actions-gh-pages
   
