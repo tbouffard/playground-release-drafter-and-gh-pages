@@ -17,6 +17,17 @@ asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
 
 - https://github.com/release-drafter/release-drafter
 - asciidoctor
+  - https://asciidoctor.org/docs/user-manual/
+    - TOC: https://asciidoctor.org/docs/user-manual/#user-toc
   - https://github.com/asciidoctor/docker-asciidoctor
+  - http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html
 - Push to github pages
   - https://github.com/peaceiris/actions-gh-pages
+  
+Curated list of GitHub Actions: 
+
+Projects using ascidoctor
+  - gradle-docker-plugin
+    - https://github.com/bmuschko/gradle-docker-plugin/tree/master/src/docs/asciidoc
+    - publishing to github pages: https://bmuschko.github.io/gradle-docker-plugin/#gradle_git_publish
+  
