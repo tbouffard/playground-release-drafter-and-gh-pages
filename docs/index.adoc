@@ -1,5 +1,6 @@
 = Welcome to gh pages playground
 :toc: left
+:icons: font
 
 This static built hosted on github pages is built with AsciiDoctor
 
