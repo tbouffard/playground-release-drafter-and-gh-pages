@@ -1,0 +1,28 @@
+name: GitHub Pages Publishing
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Documentation
+        run:
+          docker run -v "$(pwd)/docs:/documents/" -v "$(pwd)/docs-generated:/documents-generated/" --name asciidoc-to-html asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs-generated
+          keep_files: true
+          user_name: 'process-analytics-bot'
+          user_email: '62586190+process-analytics-bot@users.noreply.github.com'
+
+#          publish_branch: gh-pages
+#    commit_message: ${{ github.event.head_commit.message }}

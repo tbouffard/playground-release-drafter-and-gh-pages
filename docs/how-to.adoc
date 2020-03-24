@@ -1,0 +1,12 @@
+== How to
+
+Explain what and how to do
+
+****
+I wasn't sure if it was the right page to put the info
+****
+
+IMPORTANT: This plugin requires Gradle >= 5.2 to work properly.
+
+[TIP]
+Help yourself, drink water, not soda

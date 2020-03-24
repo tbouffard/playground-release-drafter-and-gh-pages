@@ -1,3 +1,15 @@
 = Welcome to gh pages playground
+:toc: left
+:icons: font
 
 This static built hosted on github pages is built with AsciiDoctor
+
+== Content
+
+include::demo.adoc[]
+
+include::how-to.adoc[]
+
+== Architecture
+
+include::architecture/page.adoc[]
