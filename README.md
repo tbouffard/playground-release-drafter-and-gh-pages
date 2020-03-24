@@ -24,7 +24,7 @@ asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
 - Push to github pages
   - https://github.com/peaceiris/actions-gh-pages
   
-Curated list of GitHub Actions: 
+Curated list of GitHub Actions: https://github.com/sdras/awesome-actions
 
 Projects using ascidoctor
   - gradle-docker-plugin
