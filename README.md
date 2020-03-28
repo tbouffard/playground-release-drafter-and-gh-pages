@@ -23,6 +23,18 @@ The asciidoctor sources are processed then pushed to the `gh-pages` by a [dedica
 Another workflow is also available to check build page status (TODO: to be fixed as it seems not running for now)
 
 
+## Release-Drafter
+
+Q&A (info based on the `GitHub Action` usage)
+- can I update the draft release manually (for instance, overview in the top of the content): **NO**, or at least not found how to do
+- is the release content is rebuilt on each run: **YES**, tested by removing the whole content manually or by activating the
+action after some PR have already been merged
+- categories from label - **not found how to or if this can be configured**
+  - require several labels to be added in a category
+  - exclude labels combinaison: for instance, PR marked as `enhancement` and `documentation` only referenced in the `enhancement`
+  category and not in the `documentation`
+
+
 
 ## Resources
 
