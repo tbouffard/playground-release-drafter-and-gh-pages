@@ -8,5 +8,18 @@ set -euo pipefail
 rm -rf dist/
 mkdir -p dist/
 
-cp index.html dist/
-cp -R demo/ dist/
+redirectorFile=dist/index.html
+touch ${redirectorFile}
+
+cat > ${redirectorFile} << EOL
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Refresh" content="0; https://tbouffard.github.io/playground-release-drafter-and-gh-pages/" />
+  </head>
+  <body>
+    <p>Please follow <a href="https://tbouffard.github.io/playground-release-drafter-and-gh-pages/">this link</a>.</p>
+  </body>
+</html>
+EOL
+
