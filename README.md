@@ -1,6 +1,8 @@
 # playground-release-drafter-and-gh-pages
-Playground for github pages, AsciDoctor and release-drafter actions
 
+Playground for github pages, AsciDoctor, release-drafter actions, application deployment
+
+Mainly investigations for [bpmn-visu-js](https://github.com/bonitasoft-labs/bpmn-visu-js)
 
 
 ## AsciiDoctor and GitHub Pages
@@ -42,28 +44,86 @@ action after some PR have already been merged
 
 ## Playground Vue.js App
 
-### Project setup
+This application is an adaptation of the VueJS quickstart to demonstrate deployment capabilities (see below)
+
+Available resources
+- Project setup :
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+- Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+- Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Lints and fixes files
+- Lints and fixes files
 ```
 npm run lint
 ```
+- Customize configuration: see [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Application deployments
+
+### Zeit Now
+
+Deploy the `Playground Vue.js App` on commit
+- Production: master branch, see https://playground-release-drafter-and-gh-pages-git-master.tbouffard.now.sh/
+- Preview: other branches and PR with protection for forks (see https://zeit.co/docs/v2/git-integrations/zeit-now-for-github#deployment-authorizations-for-forks) 
+
+See examples in https://github.com/zeit/now/tree/master/examples
+
+
+#### Configuration
+
+Done in both Now Dashboard and [now.json](./now.json) file
+
+- use the GitHub integration : https://zeit.co/github and https://zeit.co/docs/v2/git-integrations/zeit-now-for-github
+- deployment for every commit on every branch, update the GitHub deployment status and commit status on commit and PR.
+See https://github.com/tbouffard/playground-release-drafter-and-gh-pages/deployments
+- in this repo, the default commit status comment is disabled aka `github.silent` because it generates noise: the information are already
+available in the git commit status, PR checks and gh deployment 
+  - with message: commit f8fc893bb08bc335f33f339cd98a366664b77207 or [PR #9](https://github.com/tbouffard/playground-release-drafter-and-gh-pages/pull/9)
+  - without message: f8fc893bb08bc335f33f339cd98a366664b77207
+
+Available alternative to native GitHub integration (as of 2020-03-31)
+https://github.com/marketplace/actions/zeit-now-deployment
+- Let us control when/what to deploy (could be usefull for the `gh-pages` branch, see below)
+- do not use GH Deployment, this should have to be managed manually
+- more configuration than with the native integration 
+
+**TODO**
+- experiment `.nowignore`: for local dev only?
+- create a Now organization
+- deployment diff: https://zeit.co/blog/deploy-summary
+
+#### Managing the `gh-pages` branch
+
+Currently (as of 2020-03-31), `ZEIT Now for GitHub will deploy every push by default.`. As the usual Now build config
+is an npm build, this does not work for the `gh-pages` which only contains static files.
+
+Workaround
+Request Now to run a dedicated bash script [now-build.sh](./now-build.sh) which
+- call the npm build on the `master` branch
+- copy static resources in the [Now output directory](https://zeit.co/docs/v2/build-step#output-directory) to let Now then
+deploy them
+
+**TODO**
+- we currently deploy the html content of the gh-pages which duplicate the content between `Github Pages site` and `Now`
+- we could only deploy on Now a html page that redirected to gh pages 
+
+
+### Alternatives to be tested
+
+- heroku: https://devcenter.heroku.com/articles/github-integration
+- surge: https://surge.sh/ 
+- render: https://render.com
+- netlify: https://www.netlify.com/
+  - used by the AsciiDoctor project
+  - gh actions to publish PR: https://github.com/nwtgck/actions-netlify / https://github.com/netlify/actions
 
 
 ## Resources
@@ -80,7 +140,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   
 Curated list of GitHub Actions: https://github.com/sdras/awesome-actions
 
-Projects using ascidoctor
+Projects using AsciiDoctor
   - gradle-docker-plugin
     - https://github.com/bmuschko/gradle-docker-plugin/tree/master/src/docs/asciidoc
     - publishing to github pages: https://bmuschko.github.io/gradle-docker-plugin/#gradle_git_publish
