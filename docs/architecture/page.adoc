@@ -10,3 +10,7 @@ image::images/archi_v1.png[]
 
 image::images/archi_v2.png[]
 
+==== Random
+
+image::images/part_02.svg[]
+

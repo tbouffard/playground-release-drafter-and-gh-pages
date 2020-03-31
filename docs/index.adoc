@@ -13,3 +13,9 @@ include::how-to.adoc[]
 == Architecture
 
 include::architecture/page.adoc[]
+
+== Various Topics
+
+=== Random2
+
+image::images/part_01.svg[]
