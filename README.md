@@ -110,10 +110,8 @@ Request Now to run a dedicated bash script [now-build.sh](./now-build.sh) which
 - call the npm build on the `master` branch
 - copy static resources in the [Now output directory](https://zeit.co/docs/v2/build-step#output-directory) to let Now then
 deploy them
-
-**TODO**
-- we currently deploy the html content of the gh-pages which duplicate the content between `Github Pages site` and `Now`
-- we could only deploy on Now a html page that redirected to gh pages 
+  - 1st implementation was to publish the gh-pages content, like for commit 9f398bd32230eb056e9ded301de6984f591a9ce3 and deployment https://playground-release-drafter-and-gh-pages-aet93vb1w.now.sh/
+  - as of commit 016c036633b44fa9897db2ca1379e20fbe37b8a6, we only publish a html page that redirect to the github pages site: https://playground-release-drafter-and-gh-pages-gjs3sb48e.now.sh/
 
 
 ### Alternatives to be tested
