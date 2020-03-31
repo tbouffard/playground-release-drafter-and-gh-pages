@@ -1,3 +1,12 @@
 === Main architecture
 
 If I had time, I would write something about it!
+
+==== Architecture v1
+
+image::images/archi_v1.png[]
+
+==== Architecture v2
+
+image::images/archi_v2.png[]
+
