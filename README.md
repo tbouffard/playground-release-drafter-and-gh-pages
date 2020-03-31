@@ -20,7 +20,9 @@ asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
 ### GitHub Pages
 
 The asciidoctor sources are processed then pushed to the `gh-pages` by a [dedicated workflow](.github/workflows/gh-pages-publishing.yml)
-Another workflow is also available to check build page status (TODO: to be fixed as it seems not running for now)
+This workflow only runs on documentation or workflow configuration changes to avoid extra rebuild when nothing changes.
+ 
+Another workflow is also available to check build page status (**TODO**: to be fixed as it seems not running for now)
 
 
 ## Release-Drafter
