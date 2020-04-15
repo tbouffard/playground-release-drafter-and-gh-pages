@@ -46,13 +46,12 @@ jobs:
         if: github.event_name == 'pull_request'
         run: echo Fake Deploy Doc Preview!
       # only on push to master
-      - name: Deploy
+      - name: Deploy to gh-pages
         if: github.event_name == 'push' &&  github.event.ref == 'refs/heads/master'
-        run: echo Fake Deploy to gh-pages!
-#        uses: peaceiris/actions-gh-pages@v3
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_dir: ./documentation
-#          keep_files: true
-#          user_name: 'process-analytics-bot'
-#          user_email: '62586190+process-analytics-bot@users.noreply.github.com'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./documentation
+          keep_files: true
+          user_name: 'process-analytics-bot'
+          user_email: '62586190+process-analytics-bot@users.noreply.github.com'
