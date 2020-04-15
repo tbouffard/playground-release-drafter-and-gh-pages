@@ -13,15 +13,18 @@ AsciiDoctor sources are located in the [docs](docs)
 They are used to generate the static site which is then pushed to the `gh-pages` branch
 The site is hosted on https://tbouffard.github.io/playground-release-drafter-and-gh-pages/ 
 
-Doc generation
-```
-docker run -v "$(pwd)/docs:/documents/" -v "$(pwd)/docs-generated:/documents-generated/" --name asciidoc-to-html \
-asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
+#### Html Doc generation
+
+It currently relies on `Docker`
+
+From the root folder of the repository, run 
+```bash
+./build-doc.bash
 ```
 
 ### GitHub Pages
 
-The asciidoctor sources are processed then pushed to the `gh-pages` by a [dedicated workflow](.github/workflows/gh-pages-publishing.yml)
+The AsciiDoctor sources are processed then pushed to the `gh-pages` by a [dedicated workflow](.github/workflows/gh-pages-publishing.yml)
 This workflow
 - uses the [GitHub Pages action](https://github.com/marketplace/actions/github-pages-action)
 - commits are done by a dedicated bot user, not the github actions user
