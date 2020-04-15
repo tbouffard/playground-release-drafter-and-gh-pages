@@ -19,9 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          echo "latest commit sha: ${GITHUB_SHA}"
-          git log -1
       - name: Build
         run: ./build-doc.bash
       - name: Upload
@@ -44,8 +41,14 @@ jobs:
       - run: ls -lha
       - run: |
           echo "latest commit sha: ${GITHUB_SHA}"
-#      - name: Deploy
-#if: startsWith(github.ref, 'refs/tags/')
+      # only on pull request
+      - name: Fake Preview Deploy
+        if: github.event_name == 'pull_request'
+        run: echo Fake Deploy Doc Preview!
+      # only on push to master
+      - name: Deploy
+        if: github.event_name == 'push' &&  github.event.ref == 'refs/heads/master'
+        run: echo Fake Deploy to gh-pages!
 #        uses: peaceiris/actions-gh-pages@v3
 #        with:
 #          github_token: ${{ secrets.GITHUB_TOKEN }}
