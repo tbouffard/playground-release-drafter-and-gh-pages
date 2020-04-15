@@ -1,8 +1,8 @@
 # playground-release-drafter-and-gh-pages
 
-Playground for github pages, AsciDoctor, release-drafter actions, application deployment
+Playground for github pages, AsciDoctor, release-drafter actions, application deployment, and much more
 
-Mainly investigations for [bpmn-visu-js](https://github.com/bonitasoft-labs/bpmn-visu-js)
+Mainly investigations for [bpmn-visualization-js](https://github.com/process-analytics/bpmn-visualization-js)
 
 
 ## AsciiDoctor and GitHub Pages
