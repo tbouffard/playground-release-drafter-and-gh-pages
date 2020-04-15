@@ -1,8 +1,8 @@
 # playground-release-drafter-and-gh-pages
 
-Playground for github pages, AsciDoctor, release-drafter actions, application deployment
+Playground for github pages, AsciDoctor, release-drafter actions, application deployment, and much more
 
-Mainly investigations for [bpmn-visu-js](https://github.com/bonitasoft-labs/bpmn-visu-js)
+Mainly investigations for [bpmn-visualization-js](https://github.com/process-analytics/bpmn-visualization-js)
 
 
 ## AsciiDoctor and GitHub Pages
@@ -29,7 +29,13 @@ This workflow
 - uses the [GitHub Pages action](https://github.com/marketplace/actions/github-pages-action)
 - commits are done by a dedicated bot user, not the github actions user
 - only runs on documentation or workflow configuration changes to avoid extra rebuild when nothing changes.
- 
+
+**TODO**:
+- tests the followings on publish gh action
+    - publish_branch: gh-pages
+    - commit_message: `${{ github.event.head_commit.message }}`
+- setup a doc preview environment
+
 Another workflow is also available to check build page status (**TODO**: to be fixed as it seems not running for now)
 
 
