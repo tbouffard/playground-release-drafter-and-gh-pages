@@ -3,11 +3,10 @@
 
 BPMN Visu: *link:demo/index.html[give a try to the demo]*
 
-
+==== Information
 
 [NOTE]
 This is a note
-
 
 [TIP]
 This is a tip
@@ -21,3 +20,7 @@ This is a caution
 [IMPORTANT]
 This is important
 
+
+==== The Demo Environment (draft)
+
+image::images/demo.png[]

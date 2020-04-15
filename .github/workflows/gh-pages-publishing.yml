@@ -15,8 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Documentation
-        run:
-          docker run -v "$(pwd)/docs:/documents/" -v "$(pwd)/docs-generated:/documents-generated/" --name asciidoc-to-html asciidoctor/docker-asciidoctor  asciidoctor -D /documents-generated index.adoc
+        run: ./build-doc.bash
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
