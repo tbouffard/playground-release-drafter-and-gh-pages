@@ -87,6 +87,7 @@ var ShapeBpmnElementKind;
     ShapeBpmnElementKind["GATEWAY_EXCLUSIVE"] = "exclusiveGateway";
     ShapeBpmnElementKind["EVENT_START"] = "startEvent";
     ShapeBpmnElementKind["EVENT_END"] = "endEvent";
+    ShapeBpmnElementKind["EVENT_INTERMEDIATE_THROW"] = "intermediateThrowEvent";
 })(ShapeBpmnElementKind || (ShapeBpmnElementKind = {}));
 
 /**
@@ -159,7 +160,6 @@ class StyleConfigurator {
         this.configureTasksStyle();
         // gateways
         this.configureGatewaysStyle();
-        this.configureParallelGatewayStyle();
     }
     getStylesheet() {
         return this.graph.getStylesheet();
@@ -207,7 +207,7 @@ class StyleConfigurator {
             const style = this.cloneDefaultVertexStyle();
             style[this.mxConstants.STYLE_SHAPE] = kind;
             style[this.mxConstants.STYLE_PERIMETER] = this.mxPerimeter.EllipsePerimeter;
-            style[this.mxConstants.STYLE_VERTICAL_ALIGN] = 'top';
+            style[this.mxConstants.STYLE_VERTICAL_LABEL_POSITION] = 'bottom';
             this.putCellStyle(kind, style);
         });
     }
@@ -218,20 +218,6 @@ class StyleConfigurator {
             style[this.mxConstants.STYLE_VERTICAL_ALIGN] = 'middle';
             this.putCellStyle(kind, style);
         });
-    }
-    // TODO: to be removed as it will be configured in configureGatewaysStyle
-    // left just to not break current rendering
-    configureParallelGatewayStyle() {
-        const style = this.cloneDefaultVertexStyle();
-        style[this.mxConstants.STYLE_SHAPE] = this.mxConstants.SHAPE_RHOMBUS;
-        style[this.mxConstants.STYLE_PERIMETER] = this.mxPerimeter.RhombusPerimeter;
-        style[this.mxConstants.STYLE_VERTICAL_ALIGN] = 'top';
-        style[this.mxConstants.STYLE_STROKECOLOR] = '#96A826';
-        style[this.mxConstants.STYLE_STROKEWIDTH] = 1.7;
-        style[this.mxConstants.STYLE_SPACING_TOP] = 55;
-        style[this.mxConstants.STYLE_SPACING_RIGHT] = 110;
-        style[this.mxConstants.STYLE_GRADIENTCOLOR] = '#E9ECB1';
-        this.putCellStyle(ShapeBpmnElementKind.GATEWAY_PARALLEL, style);
     }
     configureGatewaysStyle() {
         ShapeUtil.gatewayKinds().forEach(kind => {
@@ -273,7 +259,7 @@ var ShapeBpmnEventKind;
     ShapeBpmnEventKind["NONE"] = "none";
     ShapeBpmnEventKind["TERMINATE"] = "terminate";
     ShapeBpmnEventKind["CANCEL"] = "cancel";
-    ShapeBpmnEventKind["COMPENSATION"] = "compensation";
+    ShapeBpmnEventKind["COMPENSATION"] = "compensate";
     ShapeBpmnEventKind["CONDITIONAL"] = "conditional";
     ShapeBpmnEventKind["ERROR"] = "error";
     ShapeBpmnEventKind["ESCALATION"] = "escalation";
@@ -365,71 +351,18 @@ class EndEventShape extends EventShape {
         c.fillAndStroke();
     }
 }
-
-/**
- * Copyright 2020 Bonitasoft S.A.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-const mxRhombus = MxGraphFactoryService.getMxGraphProperty('mxRhombus');
-const mxUtils$1 = MxGraphFactoryService.getMxGraphProperty('mxUtils');
-const mxConstants$1 = MxGraphFactoryService.getMxGraphProperty('mxConstants');
-class GatewayShape extends mxRhombus {
-    constructor(bounds, fill, stroke, strokewidth) {
-        super(bounds, fill, stroke, strokewidth);
-    }
-    paintVertexShape(c, x, y, w, h) {
-        this.paintOuterShape(c, x, y, w, h);
-        this.paintInnerShape(c, x, y, w, h);
-    }
-    paintOuterShape(c, x, y, w, h) {
-        super.paintVertexShape(c, x, y, w, h);
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    paintInnerShape(c, x, y, w, h) {
-        // do nothing by default
-    }
-}
-class ExclusiveGatewayShape extends GatewayShape {
+class ThrowIntermediateEventShape extends EventShape {
     constructor(bounds, fill, stroke, strokewidth = StyleConstant.STROKE_WIDTH_THIN) {
         super(bounds, fill, stroke, strokewidth);
     }
-    paintInnerShape(c, x, y, w, h) {
-        this.addExclusiveGatewaySymbol(c, x, y, w, h);
-    }
-    addExclusiveGatewaySymbol(c, x, y, w, h) {
-        const symbolScale = 3 * mxUtils$1.getValue(this.style, mxConstants$1.STYLE_MARGIN, Math.min(3 + this.strokewidth, Math.min(w / 5, h / 5)));
-        x += symbolScale;
-        y += symbolScale;
-        w -= 2 * symbolScale;
-        h -= 2 * symbolScale;
-        c.setFillColor(this.stroke);
-        c.setStrokeWidth(0);
-        c.begin();
-        c.moveTo(x + w * 0.105, y);
-        c.lineTo(x + w * 0.5, y + h * 0.38);
-        c.lineTo(x + w * 0.895, y);
-        c.lineTo(x + w, y + h * 0.11);
-        c.lineTo(x + w * 0.6172, y + h * 0.5);
-        c.lineTo(x + w, y + h * 0.89);
-        c.lineTo(x + w * 0.895, y + h);
-        c.lineTo(x + w * 0.5, y + h * 0.62);
-        c.lineTo(x + w * 0.105, y + h);
-        c.lineTo(x, y + h * 0.89);
-        c.lineTo(x + w * 0.3808, y + h * 0.5);
-        c.lineTo(x, y + h * 0.11);
-        c.close();
+    // this implementation is adapted from the draw.io BPMN 'throwing' outlines
+    // https://github.com/jgraph/drawio/blob/0e19be6b42755790a749af30450c78c0d83be765/src/main/webapp/shapes/bpmn/mxBpmnShape2.js#L431
+    paintOuterShape(c, x, y, w, h) {
+        c.ellipse(x, y, w, h);
         c.fillAndStroke();
+        const inset = this.strokewidth * 2;
+        c.ellipse(w * 0.02 + inset + x, h * 0.02 + inset + y, w * 0.96 - 2 * inset, h * 0.96 - 2 * inset);
+        c.stroke();
     }
 }
 
@@ -474,6 +407,119 @@ class MxScaleFactorCanvas {
     }
     moveTo(x, y) {
         this.c.moveTo(x * this.scaleFactor, y * this.scaleFactor);
+    }
+}
+
+/**
+ * Copyright 2020 Bonitasoft S.A.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+const mxRhombus = MxGraphFactoryService.getMxGraphProperty('mxRhombus');
+const mxUtils$1 = MxGraphFactoryService.getMxGraphProperty('mxUtils');
+const mxConstants$1 = MxGraphFactoryService.getMxGraphProperty('mxConstants');
+class GatewayShape extends mxRhombus {
+    constructor(bounds, fill, stroke, strokewidth) {
+        super(bounds, fill, stroke, strokewidth);
+    }
+    paintVertexShape(c, x, y, w, h) {
+        this.paintOuterShape(c, x, y, w, h);
+        c.setFillColor(this.stroke);
+        c.setStrokeWidth(0);
+        this.paintInnerShape(c, x, y, w, h);
+    }
+    paintOuterShape(c, x, y, w, h) {
+        super.paintVertexShape(c, x, y, w, h);
+    }
+    // TODO: will be removed when exclusive gateway will use MXScaleFactorCanvas
+    getScaledGeometry(x, y, w, h) {
+        const symbolScale = this.getInnerSymbolScale(w, h);
+        return {
+            xS: x + symbolScale,
+            yS: y + symbolScale,
+            wS: w - 2 * symbolScale,
+            hS: h - 2 * symbolScale,
+        };
+    }
+    // TODO: will be removed when exclusive gateway will use MXScaleFactorCanvas
+    getInnerSymbolScale(w, h) {
+        return 3 * mxUtils$1.getValue(this.style, mxConstants$1.STYLE_MARGIN, Math.min(3 + this.strokewidth, Math.min(w / 5, h / 5)));
+    }
+    configureCanvasForIcon(c, parentWidth, parentHeight, iconOriginalSize) {
+        // ensure we are not impacted by the configured shape stroke width
+        c.setStrokeWidth(1);
+        const parentSize = Math.min(parentWidth, parentHeight);
+        const ratioFromParent = 0.25;
+        const scaleFactor = iconOriginalSize !== 0 ? (parentSize / iconOriginalSize) * ratioFromParent : 0.5;
+        return new MxScaleFactorCanvas(c, scaleFactor);
+    }
+    translateToStartingIconPosition(c, parentX, parentY, parentWidth, parentHeight) {
+        const xTranslation = parentX + parentWidth / 4;
+        const yTranslation = parentY + parentHeight / 4;
+        c.translate(xTranslation, yTranslation);
+    }
+}
+class ExclusiveGatewayShape extends GatewayShape {
+    constructor(bounds, fill, stroke, strokewidth = StyleConstant.STROKE_WIDTH_THIN) {
+        super(bounds, fill, stroke, strokewidth);
+    }
+    paintInnerShape(c, x, y, w, h) {
+        this.addExclusiveGatewaySymbol(c, x, y, w, h);
+    }
+    addExclusiveGatewaySymbol(c, x, y, w, h) {
+        const { xS, yS, wS, hS } = this.getScaledGeometry(x, y, w, h);
+        c.begin();
+        c.moveTo(xS + wS * 0.105, yS);
+        c.lineTo(xS + wS * 0.5, yS + hS * 0.38);
+        c.lineTo(xS + wS * 0.895, yS);
+        c.lineTo(xS + wS, yS + hS * 0.11);
+        c.lineTo(xS + wS * 0.6172, yS + hS * 0.5);
+        c.lineTo(xS + wS, yS + hS * 0.89);
+        c.lineTo(xS + wS * 0.895, yS + hS);
+        c.lineTo(xS + wS * 0.5, yS + hS * 0.62);
+        c.lineTo(xS + wS * 0.105, yS + hS);
+        c.lineTo(xS, yS + hS * 0.89);
+        c.lineTo(xS + wS * 0.3808, yS + hS * 0.5);
+        c.lineTo(xS, yS + hS * 0.11);
+        c.close();
+        c.fillAndStroke();
+    }
+}
+class ParallelGatewayShape extends GatewayShape {
+    constructor(bounds, fill, stroke, strokewidth = StyleConstant.STROKE_WIDTH_THIN) {
+        super(bounds, fill, stroke, strokewidth);
+    }
+    paintInnerShape(c, x, y, w, h) {
+        this.addParallelGatewaySymbol(c, x, y, w, h);
+    }
+    addParallelGatewaySymbol(c, x, y, w, h) {
+        const canvas = this.configureCanvasForIcon(c, w, h, 0);
+        this.translateToStartingIconPosition(c, x, y, w, h);
+        canvas.begin();
+        canvas.moveTo(w * 0.38, 0);
+        canvas.lineTo(w * 0.62, 0);
+        canvas.lineTo(w * 0.62, h * 0.38);
+        canvas.lineTo(w, h * 0.38);
+        canvas.lineTo(w, h * 0.62);
+        canvas.lineTo(w * 0.62, h * 0.62);
+        canvas.lineTo(w * 0.62, h);
+        canvas.lineTo(w * 0.38, h);
+        canvas.lineTo(w * 0.38, h * 0.62);
+        canvas.lineTo(0, h * 0.62);
+        canvas.lineTo(0, h * 0.38);
+        canvas.lineTo(w * 0.38, h * 0.38);
+        canvas.close();
+        canvas.fillAndStroke();
     }
 }
 
@@ -691,7 +737,9 @@ class ShapeConfigurator {
     registerShapes() {
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.EVENT_END, EndEventShape);
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.EVENT_START, StartEventShape);
+        this.mxCellRenderer.registerShape(ShapeBpmnElementKind.EVENT_INTERMEDIATE_THROW, ThrowIntermediateEventShape);
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.GATEWAY_EXCLUSIVE, ExclusiveGatewayShape);
+        this.mxCellRenderer.registerShape(ShapeBpmnElementKind.GATEWAY_PARALLEL, ParallelGatewayShape);
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.TASK, TaskShape);
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.TASK_SERVICE, ServiceTaskShape);
         this.mxCellRenderer.registerShape(ShapeBpmnElementKind.TASK_USER, UserTaskShape);
