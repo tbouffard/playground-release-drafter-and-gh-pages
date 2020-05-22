@@ -106,21 +106,33 @@ https://github.com/marketplace/actions/zeit-now-deployment
 
 **TODO**
 - experiment `.nowignore`: for local dev only?
-- create a Now organization
+- check if the build configuration/command can be put in the `.nowconfig` file
+- create a Now organization/team
 - deployment diff: https://zeit.co/blog/deploy-summary
 
 #### Managing the `gh-pages` branch
 
-Currently (as of 2020-03-31), `ZEIT Now for GitHub will deploy every push by default.`. As the usual Now build config
-is an npm build, this does not work for the `gh-pages` which only contains static files.
+Currently (as of 2020-03-31), `ZEIT Now for GitHub will deploy every push by default`. As the usual Now build config
+is an npm build, this does not work for the `gh-pages` which only contains static files.  
+Filtering of branch to deploy: see https://github.com/zeit/now/discussions/4086 and https://github.com/zeit/now/discussions/4419
+
 
 Workaround
-Request Now to run a dedicated bash script [now-build.sh](./now-build.sh) which
+Request `Now` to run a dedicated bash script [now-build.sh](./now-build.sh) which
 - call the npm build on the `master` branch
 - copy static resources in the [Now output directory](https://zeit.co/docs/v2/build-step#output-directory) to let Now then
 deploy them
   - 1st implementation was to publish the gh-pages content, like for commit 9f398bd32230eb056e9ded301de6984f591a9ce3 and deployment https://playground-release-drafter-and-gh-pages-aet93vb1w.now.sh/
   - as of commit 016c036633b44fa9897db2ca1379e20fbe37b8a6, we only publish a html page that redirect to the github pages site: https://playground-release-drafter-and-gh-pages-gjs3sb48e.now.sh/
+- such branch also be deployed on a custom Now domain (can be a subdomain of now.sh), see https://github.com/zeit/now/discussions/4454
+
+
+#### Current caveats with `Now`
+
+Based on `2020-03-31` experiments
+- no way to filter which branch to build (see below for gh-pages) or only build PR. Generate issue if the build commands are not the same on all branches 
+- require a lot of GitHub permissions, see https://vercel.com/docs/v2/git-integrations/vercel-for-github
+- for organization repository, a paid account is needed (see https://github.com/zeit/now/discussions/4285), open source can be sponsored on demand
 
 
 ### Alternatives to be tested
