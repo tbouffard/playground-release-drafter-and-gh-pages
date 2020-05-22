@@ -38,6 +38,13 @@ This workflow
 
 Another workflow is also available to check build page status (**TODO**: to be fixed as it seems not running for now)
 
+### Documentation preview
+
+When documentation changes on Pull Request, the GitHub workflow attaches it as an artifact of the run job.
+
+See [#21](https://github.com/tbouffard/playground-release-drafter-and-gh-pages/issues/21) to have a `Doc Preview environment`
+
+
 
 ## Release-Drafter
 
