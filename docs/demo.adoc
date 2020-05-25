@@ -1,7 +1,7 @@
 === Demo
 
 
-BPMN Visu: *link:demo/index.html[give a try to the demo]*
+BPMN Visualization: *https://cdn.statically.io/gh/process-analytics/bpmn-visualization-examples/master/demo/index.html[give a try to the demo]*
 
 ==== Information
 
