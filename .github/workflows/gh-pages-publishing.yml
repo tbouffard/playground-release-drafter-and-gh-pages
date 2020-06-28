@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: documentation-${{github.sha}}
-      - nam: List content
+      - name: List content
         run: |
           pwd
           ls -lha
