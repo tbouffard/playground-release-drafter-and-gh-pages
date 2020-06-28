@@ -4,10 +4,20 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '.github/workflows/gh-pages-publishing'
+      - '.github/workflows/gh-pages-status'
+      - '.github/workflows/release-management'
+      - 'docs/**'
+      - '*.md'
+      - LICENSE
   pull_request:
     branches:
       - master
     paths-ignore:
+      - '.github/workflows/gh-pages-publishing'
+      - '.github/workflows/gh-pages-status'
+      - '.github/workflows/release-management'
       - 'docs/**'
       - '*.md'
       - LICENSE
