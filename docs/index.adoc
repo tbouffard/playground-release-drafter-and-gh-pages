@@ -2,7 +2,7 @@
 :toc: left
 :icons: font
 
-This static built hosted on github pages is built with AsciiDoctor
+This static documentation example is hosted on github pages and built with AsciiDoctor.
 
 == Content
 
