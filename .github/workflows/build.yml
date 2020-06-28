@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths-ignore:
-      - '.github/workflows/gh-pages-publishing'
-      - '.github/workflows/gh-pages-status'
-      - '.github/workflows/release-management'
+      - '.github/workflows/gh-pages-publishing.yml'
+      - '.github/workflows/gh-pages-status.yml'
+      - '.github/workflows/release-management.yml'
       - 'docs/**'
       - '*.md'
       - LICENSE
@@ -15,9 +15,9 @@ on:
     branches:
       - master
     paths-ignore:
-      - '.github/workflows/gh-pages-publishing'
-      - '.github/workflows/gh-pages-status'
-      - '.github/workflows/release-management'
+      - '.github/workflows/gh-pages-publishing.yml'
+      - '.github/workflows/gh-pages-status.yml'
+      - '.github/workflows/release-management.yml'
       - 'docs/**'
       - '*.md'
       - LICENSE
