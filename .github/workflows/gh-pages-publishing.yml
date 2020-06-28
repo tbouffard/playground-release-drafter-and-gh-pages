@@ -49,7 +49,7 @@ jobs:
         run: echo Fake Deploy Doc Preview!
       # only on push to master
       - name: Deploy to gh-pages
-#        if: github.event_name == 'push' &&  github.event.ref == 'refs/heads/master'
+        if: github.event_name == 'push' &&  github.event.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
