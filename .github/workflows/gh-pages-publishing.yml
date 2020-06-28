@@ -22,9 +22,9 @@ jobs:
       - name: Build
         run: ./build-doc.bash
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: documentation
+          name: documentation-${{github.sha}}
           path: docs-generated
 
   deploy:
@@ -35,11 +35,13 @@ jobs:
     needs: generate
     steps:
       - name: Download
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
-          name: documentation
-      - run: ls -lha
-      - run: |
+          name: documentation-${{github.sha}}
+      - nam: List content
+        run: |
+          pwd
+          ls -lha
           echo "latest commit sha: ${GITHUB_SHA}"
       # only on pull request
       - name: Fake Preview Deploy
