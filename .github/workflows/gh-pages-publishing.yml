@@ -28,9 +28,7 @@ jobs:
           path: docs-generated
 
   deploy:
-    # TODO only when run on master branch
-    # depends on generate which must succeed
-    # needs.<job id>.result
+    # TODO ensure that the needed job succeeded (needs.<job id>.result)
     runs-on: ubuntu-latest
     needs: generate
     steps:
