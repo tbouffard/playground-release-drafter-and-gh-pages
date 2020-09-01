@@ -17,11 +17,9 @@ The site is hosted on https://tbouffard.github.io/playground-release-drafter-and
 
 #### Html Doc generation
 
-It currently relies on `Docker`
-
 From the root folder of the repository, run 
 ```bash
-./build-doc.bash
+npm run docs
 ```
 
 ### GitHub Pages
