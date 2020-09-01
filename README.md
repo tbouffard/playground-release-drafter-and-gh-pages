@@ -1,4 +1,6 @@
 # playground-release-drafter-and-gh-pages
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages?ref=badge_shield)
+
 
 Playground for github pages, AsciDoctor, release-drafter actions, application deployment, and much more
 
@@ -171,3 +173,7 @@ Projects using AsciiDoctor
     - https://github.com/bmuschko/gradle-docker-plugin/tree/master/src/docs/asciidoc
     - publishing to github pages: https://bmuschko.github.io/gradle-docker-plugin/#gradle_git_publish
   
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages?ref=badge_large)
