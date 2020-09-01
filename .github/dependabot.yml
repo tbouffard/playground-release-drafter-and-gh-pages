@@ -6,6 +6,6 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "chore(dependencies)"
+#      prefix: "chore(dependencies)"
       prefix-development: "chore(dependencies) dev -"
     open-pull-requests-limit: 10
