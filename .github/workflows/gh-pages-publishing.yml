@@ -20,12 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build
-        run: ./build-doc.bash
+        run: npm run docs
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: documentation-${{github.sha}}
-          path: docs-generated
+          path: build/docs
 
   deploy:
     # TODO ensure that the needed job succeeded (needs.<job id>.result)
