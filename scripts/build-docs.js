@@ -2,6 +2,10 @@ const fs = require('fs');
 const fse = require('fs-extra')
 const Asciidoctor = require('asciidoctor');
 
+// clean existing docs
+fse.removeSync('build/docs');
+
+// build html docs
 const asciidoctor = Asciidoctor()
 const html = asciidoctor.convert(fs.readFileSync('docs/index.adoc'), {
   base_dir: 'docs',
