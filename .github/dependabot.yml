@@ -1,0 +1,11 @@
+# See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "chore(dependencies)"
+      prefix-development: "chore(dependencies) dev -"
+    open-pull-requests-limit: 10
