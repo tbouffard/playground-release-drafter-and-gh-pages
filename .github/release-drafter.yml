@@ -33,12 +33,14 @@ exclude-labels:
 template: |
   <!-- Optional: add a release summary here -->
 
-  # Changes
-  $CHANGES
-
   # Contributors
   Thanks to all the contributors of this release: $CONTRIBUTORS
 
+  # Changes
+  $CHANGES
+
 replacers:
   - search: '@dependabot-preview'
+    replace: '@dependabot'
+  - search: '@dependabot[bot]'
     replace: '@dependabot'
