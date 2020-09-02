@@ -1,10 +1,15 @@
 # playground-release-drafter-and-gh-pages
+[![Build](https://github.com/tbouffard/playground-release-drafter-and-gh-pages/workflows/Build/badge.svg)](https://github.com/tbouffard/playground-release-drafter-and-gh-pages/actions)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/tbouffard/playground-release-drafter-and-gh-pages?color=orange&include_prereleases)](https://github.com/tbouffard/playground-release-drafter-and-gh-pages/releases)
+
+
+[![Known Vulnerabilities](https://snyk.io/test/github/tbouffard/playground-release-drafter-and-gh-pages/badge.svg)](https://snyk.io/test/github/tbouffard/playground-release-drafter-and-gh-pages)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftbouffard%2Fplayground-release-drafter-and-gh-pages?ref=badge_shield)
 
 
 Playground for github pages, AsciDoctor, release-drafter actions, application deployment, and much more
 
-Mainly investigations for [bpmn-visualization-js](https://github.com/process-analytics/bpmn-visualization-js)
+Mainly investigations for [bpmn-visualization](https://github.com/process-analytics/bpmn-visualization-js)
 
 
 ## AsciiDoctor and GitHub Pages
