@@ -14,7 +14,9 @@ jobs:
     steps:
       - name: Test Application
         id: 'test_unit'
-        run: echo 'Simulate running unit tests'
+        run: |
+          echo 'Simulate running unit tests'
+          exit -1
       - name: test_unit status
         if: always()
         run: echo '${{ toJSON(steps.test_unit) }}'
