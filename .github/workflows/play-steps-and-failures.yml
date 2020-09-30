@@ -23,7 +23,7 @@ jobs:
       - name: Run on 'test_unit' failure
         #        if: failure()
         #        if: steps.test_unit.outcome == 'failure'
-        if: ${{ steps.test_unit.outcome == 'failure' }}
+        if: ${{ failure() && steps.test_unit.outcome == 'failure' }}
         run: echo 'has run'
       - name: Test Application End to End
         id: test_e2e
