@@ -16,22 +16,22 @@ jobs:
         id: 'test_unit'
         run: |
           echo 'Simulate running unit tests'
-          exit -1
+          #exit -1
       - name: test_unit status
         if: always()
         run: echo '${{ toJSON(steps.test_unit) }}'
       - name: Run on 'test_unit' failure
-        #        if: failure()
-        #        if: steps.test_unit.outcome == 'failure'
         if: ${{ failure() && steps.test_unit.outcome == 'failure' }}
         run: echo 'has run'
       - name: Test Application End to End
         id: test_e2e
-        run: echo 'Simulate running e2e tests'
+        run: |
+          echo 'Simulate running e2e tests'
+          exit -1
       - name: test_e2e status
         if: always()
         run: echo '${{ toJSON(steps.test_e2e) }}'
       - name: Run on 'test_e2e' failure
         #        if: steps.test_e2e.outcome == 'failure'
-        if: ${{ steps.test_e2e.outcome == 'failure' }}
+        if: ${{ failure() && steps.test_e2e.outcome == 'failure' }}
         run: echo 'has run'
