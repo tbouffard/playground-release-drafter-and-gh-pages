@@ -41,4 +41,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check Chrome
-       run: apt show google-chrome-stable
+        run: apt show google-chrome-stable
