@@ -16,7 +16,7 @@ jobs:
         run: echo "I am alive"
       - name: Check Edge with alternate query
         shell: powershell
-        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize
+        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
 
 ## using Get-WmiObject is too slow and has side effects on installed softwares
 #      - name: Check Edge with alternate query
