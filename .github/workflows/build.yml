@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - '.github/workflows/gh-pages-publishing.yml'
       - '.github/workflows/gh-pages-status.yml'
+      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
       - '.github/workflows/release-management.yml'
       - 'docs/**'
       - '*.md'
@@ -17,6 +18,7 @@ on:
     paths-ignore:
       - '.github/workflows/gh-pages-publishing.yml'
       - '.github/workflows/gh-pages-status.yml'
+      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
       - '.github/workflows/release-management.yml'
       - 'docs/**'
       - '*.md'
