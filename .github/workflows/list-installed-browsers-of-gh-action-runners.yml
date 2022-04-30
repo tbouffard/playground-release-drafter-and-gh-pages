@@ -14,14 +14,16 @@ jobs:
     steps:
       - name: Ping
         run: echo "I am alive"
+      - name: List installed browsers
+        shell: powershell
+#        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | where DisplayName -Like "*Edge*" | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where { $_.DisplayName -like "*Chrome*" -or $_.DisplayName -like "*Edge*"} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
       - name: List all installed software
         shell: powershell
-        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
-      - name: List all installed software (alternate query)
-        shell: powershell
-        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |  Format-Table -AutoSize
+        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
 
-## using Get-WmiObject is too slow and has side effects on installed softwares
+
+## using Get-WmiObject is too slow and has side effects on installed software
 #      - name: Check Edge with alternate query
 #        shell: powershell
 #        run: Get-WmiObject -Query "select * from Win32_Product where name='Microsoft Edge'"
