@@ -1,0 +1,71 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
+
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Setup node
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: 12.x
+#      - name: Verify node, npm version
+#        run: |
+#          node --version
+#          npm --version
+#      - name: Install dependencies
+#        run: npm ci
+#      - name: Build Application
+#        run: npm run build
+
+
+#     runs-on: ${{ matrix.os }}
+#    strategy:
+#      # we want to run the full build on all os: don't cancel running jobs even if one fails
+#      fail-fast: false
+#      matrix:
+#        os: [macos-11, ubuntu-20.04, windows-2019]
+#        browser: [chromium, firefox, chrome]
+#        include:
+#          # only test WebKit on macOS
+#          - os: macos-11
+#            browser: webkit
+#          # only test Edge on Windows
+#          - os: windows-2019
+#            browser: msedge
+
+jobs:
+  windows_browsers:
+    runs-on: windows-2019
+    steps:
+      - name: Check Edge
+        shell: powershell
+        run: Get-WmiObject -Class Win32_Product | where Name -Like "*Edge*"
+      - name: Check Chrome
+        shell: powershell
+        run: Get-WmiObject -Class Win32_Product | where Name -Like "*Chrome*"
+
+
+#  ubuntu_browsers:
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#      # we want to run the full build on all os: don't cancel running jobs even if one fails
+#      fail-fast: false
+#      matrix:
+#        os: [macos-11, ubuntu-20.04, windows-2019]
+#        browser: [chromium, firefox, chrome]
+#        include:
+#          # only test WebKit on macOS
+#          - os: macos-11
+#            browser: webkit
+#          # only test Edge on Windows
+#          - os: windows-2019
+#            browser: msedge
