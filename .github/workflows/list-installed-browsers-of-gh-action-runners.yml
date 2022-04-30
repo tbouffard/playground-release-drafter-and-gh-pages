@@ -8,31 +8,19 @@ on:
     paths:
       - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
 
-#     runs-on: ${{ matrix.os }}
-#    strategy:
-#      # we want to run the full build on all os: don't cancel running jobs even if one fails
-#      fail-fast: false
-#      matrix:
-#        os: [macos-11, ubuntu-20.04, windows-2019]
-#        browser: [chromium, firefox, chrome]
-#        include:
-#          # only test WebKit on macOS
-#          - os: macos-11
-#            browser: webkit
-#          # only test Edge on Windows
-#          - os: windows-2019
-#            browser: msedge
-
 jobs:
   windows_browsers:
     runs-on: windows-2019
     steps:
       - name: Ping
         run: echo "I am alive"
-      - name: Check Edge
+      - name: Check Edge with WmiObject
         shell: powershell
         run: Get-WmiObject -Class Win32_Product | where Name -Like "*Edge*"
-      - name: Check Chrome
+      - name: Check Edge with AppxPackage
+        shell: powershell
+        run: Get-AppxPackage -Name "Microsoft.MicrosoftEdge.Stable"
+      - name: Check Chrome with WmiObject
         shell: powershell
         run: Get-WmiObject -Class Win32_Product | where Name -Like "*Chrome*"
 
