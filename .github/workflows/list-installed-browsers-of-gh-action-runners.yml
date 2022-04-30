@@ -54,3 +54,5 @@ jobs:
     steps:
       - name: Check Chrome
         run: apt show google-chrome-stable
+      - name: List all software
+        run: apt list
