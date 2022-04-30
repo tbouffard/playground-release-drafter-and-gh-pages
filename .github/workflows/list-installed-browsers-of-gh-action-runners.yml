@@ -1,4 +1,4 @@
-name: Build
+name: List installed browsers
 
 on:
   workflow_dispatch:
