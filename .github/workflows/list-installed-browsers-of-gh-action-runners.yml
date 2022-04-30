@@ -14,13 +14,18 @@ jobs:
     steps:
       - name: Ping
         run: echo "I am alive"
-      - name: List installed browsers
+      - name: List installed browsers (64 bits)
         shell: powershell
-#        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | where DisplayName -Like "*Edge*" | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
         run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where { $_.DisplayName -like "*Chrome*" -or $_.DisplayName -like "*Edge*"} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
-      - name: List all installed software
+      - name: List installed browsers (32/64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where { $_.DisplayName -like "*Chrome*" -or $_.DisplayName -like "*Edge*"} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+      - name: List all installed software (64 bits)
         shell: powershell
         run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+      - name: List all installed software (32/64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
 
 
 ## using Get-WmiObject is too slow and has side effects on installed software
