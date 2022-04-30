@@ -27,6 +27,8 @@ jobs:
   windows_browsers:
     runs-on: windows-2019
     steps:
+      - name: Ping
+        run: echo "I am alive"
       - name: Check Edge
         shell: powershell
         run: Get-WmiObject -Class Win32_Product | where Name -Like "*Edge*"
