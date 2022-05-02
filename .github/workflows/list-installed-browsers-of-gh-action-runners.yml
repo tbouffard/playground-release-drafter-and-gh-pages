@@ -1,0 +1,58 @@
+name: List installed browsers
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
+
+jobs:
+  windows_browsers:
+    runs-on: windows-2019
+    steps:
+      - name: Ping
+        run: echo "I am alive"
+      - name: List installed browsers (64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where { $_.DisplayName -like "*Chrome*" -or $_.DisplayName -like "*Edge*"} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+      - name: List installed browsers (32/64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where { $_.DisplayName -like "*Chrome*" -or $_.DisplayName -like "*Edge*"} | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+      - name: List all installed software (64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+      - name: List all installed software (32/64 bits)
+        shell: powershell
+        run: Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+
+
+## using Get-WmiObject is too slow and has side effects on installed software
+#      - name: Check Edge with alternate query
+#        shell: powershell
+#        run: Get-WmiObject -Query "select * from Win32_Product where name='Microsoft Edge'"
+#      - name: Check Chrome with alternate query
+#        shell: powershell
+#        run: Get-WmiObject -Query "select * from Win32_Product where name='Google Chrome'"
+#      # Get-WmiObject -Class Win32_Service -Filter "name='WinRM'"
+#
+## use to retrieve the actual name
+#      - name: Check Edge with WmiObject
+#        shell: powershell
+#        run: Get-WmiObject -Class Win32_Product | where Name -Like "*Edge*"
+##      - name: Check Edge with AppxPackage
+##        shell: powershell
+##        run: Get-AppxPackage -Name "Microsoft.MicrosoftEdge.Stable"
+#      - name: Check Chrome with WmiObject
+#        shell: powershell
+#        run: Get-WmiObject -Class Win32_Product | where Name -Like "*Chrome*"
+
+
+  ubuntu_browsers:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check Chrome
+        run: apt show google-chrome-stable
+      - name: List all software
+        run: apt list
