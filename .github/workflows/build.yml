@@ -4,25 +4,27 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - '.github/workflows/gh-pages-publishing.yml'
-      - '.github/workflows/gh-pages-status.yml'
-      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
-      - '.github/workflows/release-management.yml'
-      - 'docs/**'
-      - '*.md'
-      - LICENSE
+    paths:
+      - '.github/workflows/build.yml'
+      - 'public/**/*'
+      - 'src/**/*'
+      - .browserslistrc
+      - .babel.config.js
+      - package.json
+      - package-lock.json
+      - tsconfig.json
   pull_request:
     branches:
       - master
-    paths-ignore:
-      - '.github/workflows/gh-pages-publishing.yml'
-      - '.github/workflows/gh-pages-status.yml'
-      - '.github/workflows/list-installed-browsers-of-gh-action-runners.yml'
-      - '.github/workflows/release-management.yml'
-      - 'docs/**'
-      - '*.md'
-      - LICENSE
+    paths:
+      - '.github/workflows/build.yml'
+      - 'public/**/*'
+      - 'src/**/*'
+      - .browserslistrc
+      - .babel.config.js
+      - package.json
+      - package-lock.json
+      - tsconfig.json
 
 jobs:
   build:
